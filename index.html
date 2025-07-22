@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard de Respostas SMS (MO)</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container py-5">
+    <h1 class="text-center mb-4">📊 Dashboard de Respostas SMS (MO)</h1>
+
+    <div class="text-center mb-4">
+      <a href="entregas.html" class="btn btn-outline-primary">📈 Ver Eficiência de Entregas</a>
+    </div>
+
+    <div class="row text-center mb-4">
+      <div class="col-md-4">
+        <div class="card shadow-sm p-3">
+          <h5>Total de Respostas</h5>
+          <h2 id="total-mo">...</h2>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm p-3">
+          <h5>Tempo Médio de Resposta</h5>
+          <h2 id="tempo-medio">...</h2>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm p-3">
+          <h5>Destinos Únicos</h5>
+          <h2 id="destinos-unicos">...</h2>
+        </div>
+      </div>
+    </div>
+
+    <canvas id="grafico" height="100"></canvas>
+
+    <h3 class="mt-5">📋 Respostas Recebidas</h3>
+    <div class="table-responsive">
+      <table class="table table-bordered table-sm table-hover">
+        <thead class="table-light">
+          <tr>
+            <th>Destino</th>
+            <th>Status</th>
+            <th>Data Envio</th>
+            <th>Data MO</th>
+            <th>Resposta</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-mo"></tbody>
+      </table>
+    </div>
+
+    <h3 class="mt-5 text-danger">🚨 Envios Sem MO Vinculado</h3>
+    <div class="table-responsive">
+      <table class="table table-bordered table-sm table-hover">
+        <thead class="table-warning">
+          <tr>
+            <th>SMS ID</th>
+            <th>Destino</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-sem-mo"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
