@@ -1,0 +1,113 @@
+
+/* Reset suave */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f4f6fa;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+}
+
+/* Cabeçalho */
+h1 {
+  font-weight: 700;
+  font-size: 2.2rem;
+  color: #0d6efd;
+}
+
+h3 {
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Botões */
+button.btn, a.btn {
+  font-weight: 500;
+  padding: 0.4rem 1rem;
+  transition: all 0.2s ease-in-out;
+}
+
+button.btn:hover, a.btn:hover {
+  transform: scale(1.03);
+}
+
+/* Cartões */
+.card {
+  border: none;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.card h2 {
+  font-size: 2rem;
+  color: #0d6efd;
+}
+
+/* Tabelas */
+.table {
+  background-color: white;
+}
+
+.table th {
+  background-color: #f1f3f5 !important;
+  color: #333;
+  font-weight: 600;
+}
+
+.table td, .table th {
+  vertical-align: middle !important;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f0f8ff;
+}
+
+/* DataTables Pagination */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  padding: 0.3rem 0.6rem;
+  margin: 0 0.1rem;
+  border-radius: 0.3rem;
+  background-color: #e9ecef;
+  border: none;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+  background-color: #0d6efd;
+  color: white !important;
+  font-weight: bold;
+}
+
+.dataTables_wrapper .dataTables_length select {
+  border-radius: 0.25rem;
+}
+
+/* Modal */
+.modal-content {
+  border-radius: 0.5rem;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.modal-title {
+  font-weight: 600;
+  color: #0d6efd;
+}
+
+/* Gráfico */
+canvas#grafico {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
