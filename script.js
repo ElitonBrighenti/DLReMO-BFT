@@ -1,3 +1,4 @@
+
 // ATENÇÃO: Este script pressupõe que jQuery e DataTables.js estejam carregados no HTML
 
 let dataMo = [];
@@ -14,7 +15,7 @@ const container = document.querySelector(".container");
 const headers = {
   apikey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR1eHRzb2RjeHBiZHRwd2hobGx3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMxMTU3NDYsImV4cCI6MjA2ODY5MTc0Nn0.nsHxOtT6TfU0CPrys5BhowDDr3h9zUsk3Ra9G263BOk",
   Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR1eHRzb2RjeHBiZHRwd2hobGx3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMxMTU3NDYsImV4cCI6MjA2ODY5MTc0Nn0.nsHxOtT6TfU0CPrys5BhowDDr3h9zUsk3Ra9G263BOk"
-};
+}
 
 Promise.all([
   fetch("https://duxtsodcxpbdtpwhhllw.supabase.co/rest/v1/sms_logs", { headers }).then(res => res.json()),
@@ -82,20 +83,72 @@ Promise.all([
   document.getElementById("tempo-medio").textContent = `${tempoRespostas.length ? (tempoRespostas.reduce((a,b)=>a+b,0)/tempoRespostas.length).toFixed(2) : 0} min`;
   document.getElementById("destinos-unicos").textContent = new Set(comMo.map(e => e.destino)).size;
 
-  new Chart(grafico, {
-    type: "bar",
-    data: {
-      labels: ["Com MO", "Sem MO"],
-      datasets: [{
-        label: "Total por Categoria",
-        data: [new Set(comMo.map(e => e.sms_id)).size, new Set(semMo.map(e => e.sms_id)).size],
-        backgroundColor: ["#0d6efd", "#dc3545"]
-      }]
+new Chart(grafico, {
+  type: "bar",
+  data: {
+    labels: ["Com MO", "Sem MO"],
+    datasets: [{
+      label: "Total por Categoria",
+      data: [
+        new Set(comMo.map(e => e.sms_id)).size,
+        new Set(semMo.map(e => e.sms_id)).size
+      ],
+      backgroundColor: ["#0d6efd", "#dc3545"],
+      borderRadius: 6, // deixa a borda das colunas arredondada
+      barThickness: 200 // largura das colunas
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          font: {
+            size: 14
+          }
+        }
+      },
+      x: {
+        ticks: {
+          font: {
+            size: 16
+          }
+        }
+      }
     },
-    options: { responsive: true, plugins: { legend: { display: false } } }
-  });
+    plugins: {
+      legend: {
+        display: false
+      },
+      tooltip: {
+        bodyFont: {
+          size: 16
+        },
+        titleFont: {
+          size: 18
+        },
+        padding: 12
+      },
+      datalabels: {
+        color: "#fff",
+        anchor: "end",
+        align: "start",
+        font: {
+          size: 18,
+          weight: "bold"
+        },
+        formatter: value => value
+      }
+    }
+  },
+  plugins: [ChartDataLabels]
+});
 
-  // DataTables config global
+
+
+
   $.extend(true, $.fn.dataTable.defaults, {
     pageLength: 20,
     lengthMenu: [10, 20, 50, 100],
@@ -115,7 +168,6 @@ Promise.all([
          '<"row mt-2"<"col-md-5"i><"col-md-7"p>>'
   });
 
-  // Inicializa todas as tabelas
   $('#tabela-mo').DataTable({
     data: dataMo,
     columns: [
@@ -138,22 +190,3 @@ Promise.all([
 
   $('#tabela-parceiros').DataTable();
 });
-
-// Funções de filtros individuais
-function aplicarFiltroMo() {
-  const destino = $('#filtro-destino-mo').val();
-  const status = $('#filtro-status-mo').val();
-  const tabela = $('#tabela-mo').DataTable();
-  tabela.columns(0).search(destino);
-  tabela.columns(1).search(status);
-  tabela.draw();
-}
-
-function aplicarFiltroSemMo() {
-  const destino = $('#filtro-destino-semmo').val();
-  const status = $('#filtro-status-semmo').val();
-  const tabela = $('#tabela-sem-mo').DataTable();
-  tabela.columns(1).search(destino);
-  tabela.columns(2).search(status);
-  tabela.draw();
-}
