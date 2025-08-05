@@ -11,12 +11,12 @@
   <link rel="stylesheet" href="style-profissional.css" />
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 </head>
-<body>
+<body>s
   <div class="container py-5">
     <h1 class="text-center mb-4">📊 Dashboard de Respostas SMS (MO)</h1>
 
     <div class="text-center mb-4">
-      <a href="entregas.html" class="btn btn-outline-primary">📈 Ver Eficiência de Entregas</a>
+      <a href="entregas.html" class="btn btn-outline-primary">📈 Ver Eficiência de Entregas</a>    
     </div>
 
     <div class="row text-center mb-4">
@@ -39,7 +39,19 @@
         </div>
       </div>
     </div>
-
+  <div class="row justify-content-center mb-4">
+        <div class="col-md-3">
+          <label for="data-inicial" class="form-label">📅 Data Inicial</label>
+          <input type="date" id="data-inicial" class="form-control">
+        </div>
+        <div class="col-md-3">
+          <label for="data-final" class="form-label">📅 Data Final</label>
+          <input type="date" id="data-final" class="form-control">
+        </div>
+        <div class="col-md-2 d-flex align-items-end">
+          <button class="btn btn-primary w-100" onclick="filtrarPorData()">Filtrar</button>
+        </div>
+      </div>
   <div id="grafico-container" class="text-center">
     <canvas id="grafico"></canvas>
   </div>
